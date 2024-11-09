@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 
+
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -9,6 +10,15 @@ const nextConfig: NextConfig = {
         hostname: '**'
       }
     ]
+  },
+  experimental: {
+    ppr: 'incremental',
+    after: true
+  },
+  devIndicators: {
+    appIsrStatus: true,
+    buildActivity: true,
+    buildActivityPosition: 'bottom-right',
   }
 };
 
