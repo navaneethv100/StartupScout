@@ -14,7 +14,7 @@ async function Navbar() {
             <div className='flex items-center gap-5 text-black'>
               {session && session?.user ? (
                 <>
-                  <Link href="/strtup/create">
+                  <Link href="/startup/create">
                     <span>Create</span>
                   </Link>
                   <form action={
