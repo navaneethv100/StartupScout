@@ -1,17 +1,30 @@
 import { formatDate } from '@/lib/utils'
 import React from 'react'
-import { ArrowRightIcon, EyeIcon } from 'lucide-react'
+import { EyeIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import { Startup, Author } from '@/sanity/types'
+
+export type StartupTypeCard = Omit<Startup, 'author'> & {author?: Author}
+
 
 function StartupCard({post}: {post: StartupTypeCard}) {
-  const { _created, views, author : { _id: authorId, name }, _id, description, image, category, title } = post;
+  const { 
+      _createdAt, 
+      views, 
+      author, 
+      _id, 
+      description, 
+      image, 
+      category, 
+      title 
+    } = post;
   return (
     <li className='startup-card group'>
         <div className='flex-between'>
             <p className="startup_card_date">
-                {formatDate(_created)}
+                {formatDate(_createdAt)}
             </p>
             <div className='flex gap-1.5'>
                 <EyeIcon className="size-6 text-primary"/>
@@ -20,9 +33,9 @@ function StartupCard({post}: {post: StartupTypeCard}) {
         </div>
         <div className='flex-between mt-5 gap-5'>
             <div className='flex-1'>
-                <Link href={`/user/${authorId}`}>
+                <Link href={`/user/${author?._id}`}>
                     <p className='text-16-medium line-clamp-1'>
-                        {name}
+                        {author?.name}
                     </p>
                 </Link>
                 <Link href={`/startup/${_id}`}>
@@ -32,7 +45,7 @@ function StartupCard({post}: {post: StartupTypeCard}) {
 
                 </Link>
             </div>
-            <Link href={`/user/${authorId}`}>
+            <Link href={`/user/${author?._id}`}>
               <Image src="/logo1.png" alt="placeholder" width={48} height={48} className='rounded-full'/>
             </Link>
         </div>
